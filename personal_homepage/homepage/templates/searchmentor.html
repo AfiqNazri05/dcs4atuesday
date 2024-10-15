@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Search Mentor</title>
+</head>
+<style>
+    /* Basic reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f9;
+    color: #333;
+    padding: 20px;
+}
+
+/* Form styling */
+form {
+    margin-bottom: 20px;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 600px;
+}
+
+form h3 {
+    margin-bottom: 10px;
+    font-size: 18px;
+}
+
+input[type="text"] {
+    width: calc(100% - 130px);
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 16px;
+}
+
+input[type="submit"] {
+    padding: 10px 20px;
+    background-color: #28a745;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+input[type="submit"]:hover {
+    background-color: #218838;
+}
+
+/* Table styling */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+    background-color: #fff;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+th, td {
+    padding: 10px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+}
+
+th {
+    background-color: #28a745;
+    color: white;
+    font-weight: bold;
+}
+
+tr:hover {
+    background-color: #f1f1f1;
+}
+
+/* Links for update and delete */
+a {
+    text-decoration: none;
+    color: #007bff;
+    padding: 5px 10px;
+    border-radius: 4px;
+    border: 1px solid #007bff;
+    transition: background-color 0.3s;
+}
+
+a:hover {
+    background-color: #007bff;
+    color: white;
+}
+
+</style>
+
+<body>
+    <form action="{% url 'searchmentor' %}" method="get">
+        <h3>Enter Mentor Description:</h3>
+        <input type="text" name="search" placeholder="Search by ID or Name">
+        <input type="submit" value="SEARCH">
+    </form>
+
+    <h2>--Table below is displaying objects resulted from searching in models</h2>
+    
+    <table>
+        <tr>
+            <th>MENTOR ID</th>
+            <th>MENTOR NAME</th>
+            <th>MENTOR EMAIL</th>
+        </tr>
+        {% for x in findmentor %}
+        <tr>
+            <td>{{ x.mentorid }}</td>
+            <td>{{ x.mentorname }}</td>
+            <td>{{ x.mentoremail }}</td>
+            <td><a href="{% url 'updatementor' x.mentorid %}">UPDATE</a></td>
+            <td><a href="{% url 'deletementor' x.mentorid %}">DELETE</a></td>
+        </tr>
+        {% empty %}
+        <tr>
+            <td colspan="5">No results found.</td>
+        </tr>
+        {% endfor %}
+    </table>
+</body>
+</html>

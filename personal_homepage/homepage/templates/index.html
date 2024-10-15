@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<style>
+    /* You can add your styles here */
+</style>
+
+<script>
+    // Define the submit function if you're handling form submission via JavaScript
+    function submit() {
+        const mentorId = document.getElementById('mentorid').value;
+        const mentorName = document.getElementById('mentorname').value;
+        const mentorEmail = document.getElementById('mentoremail').value;
+
+        console.log("Mentor ID: " + mentorId);
+        console.log("Mentor Name: " + mentorName);
+        console.log("Mentor Email: " + mentorEmail);
+        
+        // Handle the form submission logic here
+    }
+</script>
+
+<body>
+    <header>HELLO THERE</header>
+
+    <!-- Static classname assignment with a variable call from views.py -->
+    {% with classname="DCS 4A" %}
+    <p>Hello {{classname}} ---- This is calling variable studentname from views.py file</p>
+    {% endwith %}
+
+    <br>
+    <h2>Hello {{studentname}}</h2>
+    <hr><hr>
+
+    <!-- Program details in a list -->
+    <ul>
+        {% for x in myprogramme %}
+            <li>{{x.programmmecode}} || {{x.programmename}} || {{x.programmeaccdate}} ---- This is calling two attributes in objects</li>
+        {% endfor %}
+    </ul>
+
+    <br>
+
+    <!-- Mentor details in a table -->
+    <table border="1">
+        <thead>
+            <tr>
+                <th>Mentor ID</th>
+                <th>Mentor Name</th>
+                <th>Mentor Email</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for x in mymentor %}
+            <tr>
+                <td>{{x.mentorid}}</td>
+                <td>{{x.mentorname}}</td>
+                <td>{{x.mentoremail}}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{% url 'newmentor' %}">Click here to add new mentor</a>
+    <a href="{% url 'newstudent' %}">Click here to add new student</a>
+    <a href="{% url 'searchmentor' %}">Click here to search mentor</a>
+
+</body>
+</html>
